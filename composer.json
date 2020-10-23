@@ -1,0 +1,15 @@
+{
+    "name": "dvikan/simple-static-site-generator",
+    "description": "A simple php script for generating html files from markdown files",
+    "type": "library",
+    "require": {
+        "erusev/parsedown": "^1.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dag",
+            "email": "me@dvikan.no"
+        }
+    ]
+}

@@ -1,9 +1,17 @@
 {
     "name": "dvikan/simple-static-site-generator",
-    "description": "A simple php script for generating html files from markdown files",
-    "type": "library",
+    "description": "A simple library for generating html files from markdown files",
+    "type": "project",
     "require": {
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "bin": ["generate"],
+    "autoload": {
+        "psr-4": {
+            "dvikan\\SimpleStaticSiteGenerator\\": "src"
+        }
     },
     "license": "MIT",
     "authors": [

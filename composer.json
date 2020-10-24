@@ -1,7 +1,7 @@
 {
     "name": "dvikan/simple-static-site-generator",
     "description": "A simple library for generating html files from markdown files",
-    "type": "project",
+    "type": "library",
     "require": {
         "erusev/parsedown": "^1.7",
         "ext-json": "*",

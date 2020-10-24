@@ -5,9 +5,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/vendor/autoload.php';
 
-$generator = new \dvikan\SimpleStaticSiteGenerator\Generator(
-    '/var/posts',
-    '/var/www/public_html'
-);
+$generator = new \dvikan\SimpleStaticSiteGenerator\Generator();
 
 $generator->generate();

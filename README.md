@@ -1,6 +1,6 @@
 # Simple static site generator
 
-A simple php script for generating html files from markdown files.
+A simple library for generating html files from markdown files.
 
 ## Dependencies
 

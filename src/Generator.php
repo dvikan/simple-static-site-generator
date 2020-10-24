@@ -14,14 +14,20 @@ class Generator
 
     public function __construct(string $postsFolder = null, string $outFolder = null)
     {
-        $this->postsFolder = $postsFolder ?? __DIR__ . '/../posts';
-        $this->outFolder = $outFolder ?? __DIR__ . '/../out';
+        $this->postsFolder = $postsFolder ?? 'posts';
+        $this->outFolder = $outFolder ?? 'out';
     }
 
     public function generate()
     {
         if(!is_dir($this->postsFolder)) {
             throw new RuntimeException(sprintf('Filepath "%s" is not a folder', $this->postsFolder));
+        }
+
+        if(!is_dir($this->outFolder)) {
+            if(!mkdir($this->outFolder)) {
+                throw new RuntimeException(sprintf('Unable to create out folder "%s"', $this->outFolder));
+            }
         }
 
         if(!is_writable($this->outFolder)) {

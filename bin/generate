@@ -11,6 +11,24 @@ if(file_exists(__DIR__ . '/../../../autoload.php')) {
     require __DIR__ . '/../vendor/autoload.php';
 }
 
+set_error_handler(function ($errno, $errstr, $file, $line) {
+    renderError($errstr, $file, $line);
+    exit;
+});
+
+set_exception_handler(function (Throwable $e) {
+    renderError($e->getMessage(), $e->getFile(), $e->getLine());
+    exit;
+});
+
+function renderError($message, $file, $line)
+{
+    if(ob_get_level() !== 0) {
+        ob_clean();
+    }
+    print sprintf("%s in %s:%s\n", $message, basename($file), $line);
+}
+
 $generator = new \dvikan\SimpleStaticSiteGenerator\Generator();
 
 $generator->generate();

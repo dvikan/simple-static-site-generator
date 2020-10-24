@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>%s</title>
+<title><?= $title ?></title>
 <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Libre%%20Franklin' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Libre%20Franklin' rel='stylesheet' type='text/css'>
 
 <style>
 body
@@ -18,9 +18,13 @@ body
     font-weight: 500;
 }
 
-pre
+pre, code
 {
     background: #eef;
+}
+
+a {
+    text-decoration: underline;
 }
 
 .container
@@ -28,15 +32,27 @@ pre
     width: 800px;
     margin: 0 auto;
 }
+
 header
 {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
     margin-bottom: 50px;
+}
+.header-right {
+
+}
+
+header a{
+    padding: 12px;
 }
 
 .entry
 {
     margin-bottom: 10px
 }
+
 .meta
 {
     color: #999;
@@ -50,5 +66,13 @@ header
 
 <div class="container">
     <header>
-        <a href="/">Index</a>
+        <div class="header-right">
+            <a href="/">Home</a>
+
+            <?php foreach($pages as $_page): ?>
+                <a href="<?= $_page->slug ?>">
+                    <?= $_page->title ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
     </header>

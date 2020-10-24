@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
-if(file_exists(__DIR__ . '/../../../vendor.php')) {
+if(file_exists(__DIR__ . '/../../../autoload.php')) {
     // We are installed as a library
-    require __DIR__ . '/../../../vendor.php';
+    require __DIR__ . '/../../../autoload.php';
 } else {
     // We are installed as a project or git cloned
     require __DIR__ . '/../vendor/autoload.php';

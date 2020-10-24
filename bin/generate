@@ -1,0 +1,16 @@
+#!/bin/env php
+<?php
+
+declare(strict_types=1);
+
+if(file_exists(__DIR__ . '/../../../vendor.php')) {
+    // We are installed as a library
+    require __DIR__ . '/../../../vendor.php';
+} else {
+    // We are installed as a project or git cloned
+    require __DIR__ . '/../vendor/autoload.php';
+}
+
+$generator = new \dvikan\SimpleStaticSiteGenerator\Generator();
+
+$generator->generate();

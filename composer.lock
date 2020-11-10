@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abb9deb0416bb741ce033d42be186056",
+    "content-hash": "e2a396340838b8b3b4efae10021e98ec",
     "packages": [
+        {
+            "name": "dvikan/simple-parts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dvikan/simple-parts.git",
+                "reference": "5a5a2084d3491ca5c3263b9e9034a52a04286cad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dvikan/simple-parts/zipball/5a5a2084d3491ca5c3263b9e9034a52a04286cad",
+                "reference": "5a5a2084d3491ca5c3263b9e9034a52a04286cad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-imap": "*",
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "ext-simplexml": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "dvikan\\SimpleParts\\": "src/"
+                },
+                "files": [
+                    "src/utils.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple components for building applications",
+            "support": {
+                "issues": "https://github.com/dvikan/simple-parts/issues",
+                "source": "https://github.com/dvikan/simple-parts/tree/master"
+            },
+            "time": "2020-11-03T17:30:45+00:00"
+        },
         {
             "name": "erusev/parsedown",
             "version": "1.7.4",
@@ -56,10 +101,16 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dvikan/simple-parts": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-simplexml": "*"
+    },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

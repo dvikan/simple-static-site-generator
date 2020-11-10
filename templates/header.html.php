@@ -18,6 +18,10 @@ body
     font-weight: 500;
 }
 
+img
+{
+    max-width: 100%;
+}
 pre, code
 {
     background: #eef;

@@ -5,7 +5,9 @@
     "require": {
         "erusev/parsedown": "^1.7",
         "ext-json": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+      "ext-simplexml": "*",
+        "dvikan/simple-parts": "dev-master"
     },
     "bin": ["bin/generate"],
     "autoload": {

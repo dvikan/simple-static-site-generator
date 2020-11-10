@@ -1,12 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace dvikan\SimpleStaticSiteGenerator;
 
+use DateTime;
 use JsonException;
 use Parsedown;
 use RuntimeException;
+use SimpleXMLElement;
 use stdClass;
 
 class Generator
@@ -15,12 +15,21 @@ class Generator
     private $pageFolder;
     private $outFolder;
     private $parsedown;
+    private $baseUrl;
+    private $title;
+    private $description;
 
     public function __construct(
+        string $title,
+        string $baseUrl,
+        string $description,
         string $postFolder = null,
         string $pageFolder = null,
         string $outFolder = null
     ) {
+        $this->title = $title;
+        $this->baseUrl = $baseUrl;
+        $this->description = $description;
         $this->postFolder = $postFolder ?? 'posts';
         $this->pageFolder = $pageFolder ?? 'pages';
         $this->outFolder = $outFolder ?? 'out';
@@ -37,6 +46,7 @@ class Generator
         $this->createPosts($posts, $pages);
         $this->createPages($pages);
         $this->createIndex($posts, $pages);
+        $this->createRssFeed($posts);
     }
 
     private function fetchPosts(): array
@@ -90,11 +100,36 @@ class Generator
         file_put_contents(
             sprintf('%s/index.html', $this->outFolder),
             $this->render('index.html.php', [
-                'title' => 'Index',
+                'title' => $this->title,
                 'pages' => $pages,
                 'posts' => $posts,
             ])
         );
+    }
+
+    private function createRssFeed(array $posts)
+    {
+        $xml = new SimpleXMLElement('<rss/>');
+        $xml->addAttribute("version", "2.0");
+
+        $channel = $xml->addChild("channel");
+
+        $channel->addChild("title", $this->title);
+        $channel->addChild("link", $this->baseUrl);
+        $channel->addChild("description", $this->description);
+        $channel->addChild("language", "en-us");
+
+        foreach ($posts as $post) {
+            $item = $channel->addChild("item");
+
+            $item->addChild("title", $post->title);
+            $item->addChild("pubDate", $post->date->format(DateTime::RFC822));
+            $item->addChild("link", $post->url);
+            $item->addChild("guid", $post->url);
+            $item->addChild("description", mb_substr($post->content, 0, 100));
+        }
+
+        $xml->asXML(sprintf('%s/feed.xml', $this->outFolder));
     }
 
     private function render(string $template, array $context = []): string
@@ -125,12 +160,13 @@ class Generator
         $markdown = implode("\n\n", array_slice($fileParts, 1));
 
         $file = new stdClass();
+
         $file->title = $header->title;
         $file->content = $this->parsedown->text($markdown);
 
         if (preg_match('/^\d{4}-\d{2}-\d{2}-/', $filename)) {
             // This is a post with filename like 2020-01-31-hello-world
-            $file->date = mb_substr($filename, 0, 10);
+            $file->date = DateTime::createFromFormat('Y-m-d', mb_substr($filename, 0, 10));
             $file->slug = mb_substr($filename, 11);
         } else if (preg_match('/^[a-z]+$/', $filename)) {
             // This is a page. It has no date
@@ -138,6 +174,8 @@ class Generator
         } else {
             throw new RuntimeException(sprintf('Illegal filename "%s"', $filename));
         }
+
+        $file->url = sprintf("%s/%s", $this->baseUrl, $file->slug);
 
         return $file;
     }

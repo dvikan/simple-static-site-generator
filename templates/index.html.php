@@ -4,7 +4,7 @@
 
     <div class="entry">
         <span class="meta">
-            <?= $_post->date ?>
+            <?= $_post->date->format('Y-m-d') ?>
         </span>
 
         <a href="/<?= $_post->slug ?>">

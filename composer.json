@@ -17,7 +17,7 @@
       "ext-simplexml": "*",
         "dvikan/simple-parts": "dev-master"
     },
-    "bin": ["generate"],
+    "bin": ["generate", "router"],
     "autoload": {
         "psr-4": {
             "dvikan\\SimpleStaticSiteGenerator\\": "./"

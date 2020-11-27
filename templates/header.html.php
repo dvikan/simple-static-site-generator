@@ -79,8 +79,8 @@ header a{
                 <a href="<?= $_page->slug ?>">
                     <?= $_page->title ?>
                 </a>
-
-            <a href="/feed.xml">Rss</a>
             <?php endforeach; ?>
+
+            <a href="/feed.xml">RSS</a>
         </div>
     </header>

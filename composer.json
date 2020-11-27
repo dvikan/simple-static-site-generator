@@ -1,4 +1,12 @@
 {
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../simple-parts"
+        }
+    ],
+
     "name": "dvikan/simple-static-site-generator",
     "description": "A simple library for generating html files from markdown files",
     "type": "library",

@@ -1,4 +1,4 @@
-<h1>Index</h1>
+
 
 <?php foreach($posts as $_post): ?>
 

@@ -4,52 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2a396340838b8b3b4efae10021e98ec",
+    "content-hash": "a62f798210aa7dcb807f64a4925bf8e6",
     "packages": [
         {
             "name": "dvikan/simple-parts",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dvikan/simple-parts.git",
-                "reference": "5a5a2084d3491ca5c3263b9e9034a52a04286cad"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dvikan/simple-parts/zipball/5a5a2084d3491ca5c3263b9e9034a52a04286cad",
-                "reference": "5a5a2084d3491ca5c3263b9e9034a52a04286cad",
-                "shasum": ""
+                "type": "path",
+                "url": "../simple-parts",
+                "reference": "7c6009265aafd8150cda78181afca44a7b3153b8"
             },
             "require": {
                 "ext-curl": "*",
                 "ext-imap": "*",
                 "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
                 "ext-pdo": "*",
                 "ext-simplexml": "*"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^9.4"
-            },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "dvikan\\SimpleParts\\": "src/"
+                    "dvikan\\SimpleParts\\": [
+                        "src",
+                        "src/cache",
+                        "src/common",
+                        "src/console",
+                        "src/container",
+                        "src/error-handler",
+                        "src/file",
+                        "src/http",
+                        "src/json",
+                        "src/logger",
+                        "src/migrator",
+                        "src/rss",
+                        "src/session",
+                        "src/shell",
+                        "src/template",
+                        "src/twitch",
+                        "src/yahoo-finance"
+                    ]
                 },
                 "files": [
-                    "src/utils.php"
+                    "src/common/constants.php",
+                    "src/http/functions.php",
+                    "src/session/session.php",
+                    "src/template/template.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "Simple components for building applications",
-            "support": {
-                "issues": "https://github.com/dvikan/simple-parts/issues",
-                "source": "https://github.com/dvikan/simple-parts/tree/master"
-            },
-            "time": "2020-11-03T17:30:45+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "erusev/parsedown",
@@ -95,12 +110,16 @@
                 "markdown",
                 "parser"
             ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
             "time": "2019-12-30T22:54:17+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "dvikan/simple-parts": 20
     },

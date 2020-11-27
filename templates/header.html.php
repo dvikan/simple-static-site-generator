@@ -6,6 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= $title ?></title>
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="<?= $baseUrl ?>/feed.xml">
 <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Libre%20Franklin' rel='stylesheet' type='text/css'>
 
@@ -77,6 +79,8 @@ header a{
                 <a href="<?= $_page->slug ?>">
                     <?= $_page->title ?>
                 </a>
+
+            <a href="/feed.xml">Rss</a>
             <?php endforeach; ?>
         </div>
     </header>

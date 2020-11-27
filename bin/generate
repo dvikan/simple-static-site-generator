@@ -18,11 +18,10 @@ ErrorHandler::create();
 
 $generator = new Generator([
     'postFolder'    => $argv[1] ?? 'posts',
-    'pageFolder'    => $argv[2] ?? 'pages',
-    'outFolder'     => $argv[3] ?? 'out',
-    'title'         => $argv[4] ?? '',
-    'description'   => $argv[5] ?? '',
-    'baseUrl'       => $argv[6] ?? '',
+    'outFolder'     => $argv[2] ?? 'out',
+    'title'         => $argv[3] ?? '',
+    'description'   => $argv[4] ?? '',
+    'baseUrl'       => $argv[5] ?? '',
 ]);
 
 $generator->generate();

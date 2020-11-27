@@ -13,7 +13,6 @@ class Generator
 {
     private const DEFAULTS = [
         'postFolder'    => 'posts',
-        'pageFolder'    => 'pages',
         'outFolder'     => 'out',
         'title'         => '', // for frontppage
         'description'   => '', // for rss feed
@@ -22,6 +21,8 @@ class Generator
 
     private $options;
     private $parsedown;
+    private $posts;
+    private $pages;
 
     public function __construct(array $options = [])
     {
@@ -33,77 +34,70 @@ class Generator
     {
         $this->guardAgainstFileSystemIssues();
 
-        $posts = $this->fetchPosts();
-        $pages = $this->fetchPages();
-
-        $this->createPosts($posts, $pages);
-        $this->createPages($pages);
-        $this->createIndex($posts, $pages);
-        $this->createRssFeed($posts);
-    }
-
-    private function fetchPosts(): array
-    {
-        $posts = [];
+        $files = [];
         foreach (glob($this->options['postFolder'] . "/*.md") as $postFile) {
-            $posts[] = $this->parseFilePath($postFile);
+            $files[] = $this->parseFilePath($postFile);
         }
-        return array_reverse($posts);
+        $files = array_reverse($files);
+
+        $this->posts = array_filter($files, function ($file) {
+            return $file->type === 'post';
+        });
+
+        $this->pages = array_filter($files, function ($file) {
+            return $file->type === 'page';
+        });
+
+        $this->createPosts();
+        $this->createPages();
+        $this->createIndex();
+        $this->createRssFeed();
     }
 
-    private function fetchPages(): array
+    private function createPosts(): void
     {
-        $pages = [];
-        foreach (glob($this->options['pageFolder'] . "/*.md") as $pageFile) {
-            $pages[] = $this->parseFilePath($pageFile);
-        }
-        return $pages;
-    }
-
-    private function createPosts(array $posts, array $pages): void
-    {
-        foreach ($posts as $post) {
+        foreach ($this->posts as $post) {
             file_put_contents(
                 sprintf('%s/%s.html', $this->options['outFolder'], $post->slug),
                 $this->render('post.html.php', [
                     'baseUrl' => $this->options['baseUrl'],
                     'title' => $post->title,
-                    'pages' => $pages,
+                    'pages' => $this->pages,
                     'post' => $post,
                 ])
             );
         }
     }
 
-    private function createPages(array $pages): void
+    private function createPages(): void
     {
-        foreach ($pages as $page) {
+        foreach ($this->pages as $page) {
             file_put_contents(
                 sprintf('%s/%s.html', $this->options['outFolder'], $page->slug),
                 $this->render('page.html.php', [
                     'baseUrl' => $this->options['baseUrl'],
                     'title' => $page->title,
-                    'pages' => $pages,
+                    'pages' => $this->pages,
                     'page' => $page,
                 ])
             );
         }
     }
 
-    private function createIndex(array $posts, array $pages): void
+    private function createIndex(): void
     {
         file_put_contents(
             sprintf('%s/index.html', $this->options['outFolder']),
             $this->render('index.html.php', [
                 'baseUrl' => $this->options['baseUrl'],
                 'title' => $this->options['title'],
-                'pages' => $pages,
-                'posts' => $posts,
+                'pages' => $this->pages,
+                'posts' => $this->posts,
             ])
         );
     }
 
-    private function createRssFeed(array $posts)
+    private function createRssFeed()
     {
         $xml = new SimpleXMLElement('<rss/>');
         $xml->addAttribute("version", "2.0");
@@ -115,7 +109,7 @@ class Generator
         $channel->addChild("description", $this->options['description']);
         $channel->addChild("language", "en-us");
 
-        foreach ($posts as $post) {
+        foreach ($this->posts as $post) {
             $item = $channel->addChild("item");
 
             $item->addChild("title", $post->title);
@@ -173,12 +167,14 @@ class Generator
         $file->content = $this->parsedown->text($markdown);
 
         if (preg_match('/^\d{4}-\d{2}-\d{2}-[a-zA-Z0-9-]+$/', $filename)) {
+            $file->type = 'post';
             // This is a post with filename like 2020-01-31-hello-world
             $file->date = DateTime::createFromFormat('Y-m-d', mb_substr($filename, 0, 10));
             $file->slug = mb_substr($filename, 11);
         } else if (preg_match('/^[a-z]+$/', $filename)) {
             // This is a page. It has no date
             $file->slug = $filename;
+            $file->type = 'page';
         } else {
             throw new RuntimeException(sprintf('Illegal filename "%s"', $basename));
         }
@@ -192,10 +188,6 @@ class Generator
     {
         if (!is_dir($this->options['postFolder'])) {
             throw new RuntimeException(sprintf('Filepath "%s" is not a folder', $this->options['postFolder']));
-        }
-
-        if (!is_dir($this->options['pageFolder'])) {
-            throw new RuntimeException(sprintf('Filepath "%s" is not a folder', $this->options['pageFolder']));
         }
 
         if (!is_dir($this->options['outFolder'])) {

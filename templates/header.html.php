@@ -12,24 +12,34 @@
 <link href='//fonts.googleapis.com/css?family=Libre%20Franklin' rel='stylesheet' type='text/css'>
 
 <style>
-body
-{
-    font-size: 16px;
-    font-family: sans-serif;
-    line-height: 21px;
-    font-weight: 500;
+body {
+    font-family: Menlo, Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+    font-size: 14px;
+    line-height: 1.4em;
+    background-color: #ffffff;
+    color: #2b2b2b;
 }
 
 img
 {
     max-width: 100%;
 }
-pre, code
-{
-    background: #eef;
+
+pre {
+    background-color: #000000;
+    color: #cccccc;
+    padding: 20px;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 a {
+    background: transparent;
+    color: rgb(33, 144, 211);
+    text-decoration: none;
+}
+
+a:hover {
     text-decoration: underline;
 }
 
@@ -42,9 +52,8 @@ a {
 header
 {
     overflow: hidden;
-    background-color: #f1f1f1;
     padding: 20px 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .header-right {
 

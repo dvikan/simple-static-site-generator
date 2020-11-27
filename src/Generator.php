@@ -172,7 +172,7 @@ class Generator
         $file->title = $header->title;
         $file->content = $this->parsedown->text($markdown);
 
-        if (preg_match('/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/', $filename)) {
+        if (preg_match('/^\d{4}-\d{2}-\d{2}-[a-zA-Z0-9-]+$/', $filename)) {
             // This is a post with filename like 2020-01-31-hello-world
             $file->date = DateTime::createFromFormat('Y-m-d', mb_substr($filename, 0, 10));
             $file->slug = mb_substr($filename, 11);

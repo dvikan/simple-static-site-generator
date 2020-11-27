@@ -126,9 +126,9 @@ class Generator
     {
         extract($context);
         ob_start();
-        require __DIR__ . '/../templates/header.html.php';
-        require __DIR__ . '/../templates/' . $template;
-        require __DIR__ . '/../templates/footer.html.php';
+        require __DIR__ . '/templates/header.html.php';
+        require __DIR__ . '/templates/' . $template;
+        require __DIR__ . '/templates/footer.html.php';
         return ob_get_clean();
     }
 

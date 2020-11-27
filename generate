@@ -6,12 +6,12 @@ declare(strict_types=1);
 use dvikan\SimpleParts\ErrorHandler;
 use dvikan\SimpleStaticSiteGenerator\Generator;
 
-if(file_exists(__DIR__ . '/../../../autoload.php')) {
+if(file_exists(__DIR__ . '/../../autoload.php')) {
     // We are installed as a library
-    require __DIR__ . '/../../../autoload.php';
+    require __DIR__ . '/../../autoload.php';
 } else {
     // We are installed as a project or git cloned
-    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__ . '/vendor/autoload.php';
 }
 
 ErrorHandler::create();

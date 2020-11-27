@@ -17,10 +17,10 @@
       "ext-simplexml": "*",
         "dvikan/simple-parts": "dev-master"
     },
-    "bin": ["bin/generate"],
+    "bin": ["generate"],
     "autoload": {
         "psr-4": {
-            "dvikan\\SimpleStaticSiteGenerator\\": "src"
+            "dvikan\\SimpleStaticSiteGenerator\\": "./"
         }
     },
     "license": "MIT",

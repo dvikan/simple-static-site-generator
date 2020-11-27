@@ -12,7 +12,7 @@ use stdClass;
 class Generator
 {
     private const DEFAULTS = [
-        'postFolder'    => 'posts',
+        'postFolder'    => 'files',
         'outFolder'     => 'out',
         'title'         => '', // for frontppage
         'description'   => '', // for rss feed

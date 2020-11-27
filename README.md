@@ -1,44 +1,38 @@
 # Simple static site generator
 
-A simple library for generating html files from markdown files.
+A simple tool for generating html files from markdown files.
 
 Features:
 
-* Posts
-* Pages
-* Frontpage with all the posts
+* posts and pages
+* a frontpage with all the posts
+* rss feed
 
-## Installation
-
-Install as a library:
-
-```bash
-$ composer require dvikan/simple-static-site-generator:dev-main
-```
-Install as as project:
-
-```bash
-$ composer create-project dvikan/simple-static-site-generator:dev-main
-```
-    
 ## Get started
 
-Create the `posts` and `pages` folders and add entries to them.
+Install:
 
-The post files must have date and slug in their file name:
-
+```bash
+$ composer require dvikan/simple-static-site-generator
 ```
-$ mkdir posts pages
-$ cat > posts/2020-10-24-hello-world.md
+
+Place your markdown files in `files/`.
+
+Create a post:
+
+```bash
+$ mkdir files
+$ cat > files/2020-10-24-hello-world.md
 {
     "title": "Hello World"
 }
+
+Hello world!
 ```
 
-Pages simply need the slug in the filename:
+Create a page:
 
 ```bash
-This is my first blog post!
 $ cat > pages/about.md
 {
     "title": "About"
@@ -47,39 +41,22 @@ $ cat > pages/about.md
 This is the about page.
 ```
 
-Generate the site:
+Generate html files:
 
 ```bash
 ./vendor/bin/generate
 ```
 
-Deploy it:
+The generated html files is located in `out/`.
+
+## Options
+
+The description and url are used for producing the rss feed.
 
 ```bash
-php -S localhost:8080 -t out/ bin/router.php
+./vendor/bin/generate files/ out/ 'title' 'description' 'https://example.com'
 ```
 
-Browse it: http://localhost:8080/
+## Misc
 
-You can also use the library directly from your own code:
-
-```php
-$generator = new Generator('title', 'https://example.com', 'description');
-
-$generator->generate();
-```
-
-## Development
-
-Installation:
-
-```bash
-git clone https://github.com/dvikan/simple-static-site-generator.git
-cd simple-static-site-generator
-composer install
-php -S localhost:8080 -t out/ bin/router.php
-```
-
-Browse it: http://localhost:8080/
-
-We are depending on `erusev/parsedown` for the markdown compiler.
+There is a dependency on `erusev/parsedown` for the markdown compiler.

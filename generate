@@ -16,8 +16,10 @@ if(file_exists(__DIR__ . '/../../autoload.php')) {
 
 ErrorHandler::create();
 
-$config = require 'config.php';
+if (file_exists('config.php')) {
+    $config = require 'config.php';
+}
 
-$generator = new Generator($config);
+$generator = new Generator($config ?? []);
 
 $generator->generate();

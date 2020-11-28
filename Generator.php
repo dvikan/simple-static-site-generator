@@ -35,8 +35,8 @@ class Generator
         $this->guardAgainstFileSystemIssues();
 
         $files = [];
-        foreach (glob($this->options['postFolder'] . "/*.md") as $postFile) {
-            $files[] = $this->parseFilePath($postFile);
+        foreach (glob($this->options['files'] . "/*.md") as $file) {
+            $files[] = $this->parseFilePath($file);
         }
         $files = array_reverse($files);
 
@@ -195,8 +195,8 @@ class Generator
 
     private function guardAgainstFileSystemIssues(): void
     {
-        if (!is_dir($this->options['postFolder'])) {
-            throw new RuntimeException(sprintf('Filepath "%s" is not a folder', $this->options['postFolder']));
+        if (!is_dir($this->options['files'])) {
+            throw new RuntimeException(sprintf('Filepath "%s" is not a folder', $this->options['files']));
         }
 
         if (!is_dir($this->options['outFolder'])) {

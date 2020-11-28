@@ -1,3 +1,11 @@
+<h1 class="title">
+    <?= $title ?>
+</h1>
+
+<h2 class="description">
+    <?= $description ?>
+</h2>
+
 <?php foreach($posts as $_post): ?>
 
     <div class="entry">

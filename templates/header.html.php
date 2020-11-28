@@ -12,67 +12,67 @@
 <link href='//fonts.googleapis.com/css?family=Libre%20Franklin' rel='stylesheet' type='text/css'>
 
 <style>
-body {
-    font-family: Menlo, Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
-    font-size: 14px;
-    line-height: 1.4em;
-    background-color: #ffffff;
-    color: #2b2b2b;
-}
 
-img
-{
-    max-width: 100%;
-}
+    h1,h2 {
 
-pre {
-    background-color: #000000;
-    color: #cccccc;
-    padding: 20px;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
+        margin: 0;
+    }
+    body {
+        font-family: Menlo, Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+        font-size: 14px;
+        line-height: 1.4em;
+        background-color: #ffffff;
+        color: #2b2b2b;
+    }
 
-a {
-    background: transparent;
-    color: rgb(33, 144, 211);
-    text-decoration: none;
-}
+    img {
+        max-width: 100%;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
+    pre {
+        background-color: #000000;
+        color: #cccccc;
+        padding: 20px;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
 
-.container
-{
-    width: 800px;
-    margin: 0 auto;
-}
+    a {
+        background: transparent;
+        color: rgb(33, 144, 211);
+        text-decoration: none;
+    }
 
-header
-{
-    overflow: hidden;
-    padding: 20px 10px;
-    margin-bottom: 20px;
-}
-.header-right {
+    a:hover {
+        text-decoration: underline;
+    }
 
-}
+    .container {
+        width: 800px;
+        margin: 0 auto;
+    }
 
-header a{
-    padding: 12px;
-}
+    header {
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
 
-.entry
-{
-    margin-bottom: 10px
-}
+    header a {
+        padding: 12px;
+    }
 
-.meta
-{
-    color: #999;
-    margin-right: 20px;
-}
+    .entry {
+        margin-bottom: 10px
+    }
+
+    .meta {
+        color: #999;
+        margin-right: 20px;
+    }
+
+    h1.title, h2.description {
+        margin-bottom: 30px;
+    }
 </style>
 
 </head>

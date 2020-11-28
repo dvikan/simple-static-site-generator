@@ -91,6 +91,7 @@ class Generator
             $this->render('index.html.php', [
                 'baseUrl' => $this->options['baseUrl'],
                 'title' => $this->options['title'],
+                'description' => $this->options['description'],
                 'pages' => $this->pages,
                 'posts' => $this->posts,
             ])

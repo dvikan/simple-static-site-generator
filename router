@@ -7,12 +7,6 @@ if ($uri === '/') {
     exit;
 }
 
-if ($uri === '/feed.xml') {
-    header('Content-type: application/rss+xml');
-    print file_get_contents("out/feed.xml");
-    exit;
-}
-
 if (file_exists("out/$uri.html")) {
     print file_get_contents("out/$uri.html");
     exit;

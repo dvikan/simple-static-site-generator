@@ -49,14 +49,6 @@ Generate html files:
 
 The generated html files is located in `out/`.
 
-## Options
-
-The description and url are used for producing the rss feed.
-
-```bash
-./vendor/bin/generate files/ out/ 'title' 'description' 'https://example.com'
-```
-
 ## Misc
 
 There is a dependency on `erusev/parsedown` for the markdown compiler.

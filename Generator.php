@@ -12,11 +12,11 @@ use stdClass;
 class Generator
 {
     private const DEFAULTS = [
-        'postFolder'    => 'files',
+        'files'         => 'files',
         'outFolder'     => 'out',
-        'title'         => '', // for frontppage
-        'description'   => '', // for rss feed
-        'baseUrl'       => 'http://localhost', // for rss
+        'title'         => '',
+        'description'   => '',
+        'baseUrl'       => 'http://localhost',
     ];
 
     private $options;
@@ -52,6 +52,7 @@ class Generator
         $this->createPages();
         $this->createIndex();
         $this->createRssFeed();
+        $this->createStyles();
     }
 
     private function createPosts(): void
@@ -183,6 +184,13 @@ class Generator
         $file->url = sprintf("%s/%s", $this->options['baseUrl'], $file->slug);
 
         return $file;
+    }
+
+    private function createStyles()
+    {
+        if (!copy(__DIR__ . '/templates/styles.css', sprintf('%s/styles.css', $this->options['outFolder']))) {
+            throw new RuntimeException('Unable to copy styles.css');
+        }
     }
 
     private function guardAgainstFileSystemIssues(): void

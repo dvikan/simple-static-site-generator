@@ -16,12 +16,8 @@ if(file_exists(__DIR__ . '/../../autoload.php')) {
 
 ErrorHandler::create();
 
-$generator = new Generator([
-    'postFolder'    => $argv[1] ?? 'files',
-    'outFolder'     => $argv[2] ?? 'out',
-    'title'         => $argv[3] ?? '',
-    'description'   => $argv[4] ?? '',
-    'baseUrl'       => $argv[5] ?? '',
-]);
+$config = require 'config.php';
+
+$generator = new Generator($config);
 
 $generator->generate();
